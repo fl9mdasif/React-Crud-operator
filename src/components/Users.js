@@ -8,15 +8,12 @@ const Users = () => {
     const navigate = useNavigate()
     const [users, setUsers] = useState([]);
 
-
     useEffect(() => {
-
         fetch(`http://localhost:5001/user/all`)
             .then(res => res.json())
             .then(data => setUsers(data));
 
     }, []);
-
 
     const updateUser = (id) => {
         const proceed = window.confirm('Are you sure to delete product');
