@@ -2,7 +2,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Update from './components/Update';
-import 'boxicons'
+import 'boxicons';
 
 function App() {
   return (
