@@ -23,7 +23,6 @@ const Update = () => {
     const onSubmit = formInfo => {
         // formInfo.preventDefault();
         const { fname, lname, email, mobile, role, state } = formInfo;
-
         const user = {
             First_Name: fname,
             Last_Name: lname,
@@ -36,7 +35,6 @@ const Update = () => {
 
 
         const url = `http://localhost:5001/user/all/${userId}`;
-
 
         //put updateOne
         fetch(url, {
@@ -196,7 +194,7 @@ const Update = () => {
 
 
                                 {/* Sbmit Button */}
-                                <input className='border px-4 py-2 w-full max-w-xs bg-red-500' type="submit" value="Update User" />
+                                <input className='border px-4 py-2 w-full max-w-xs bg-red-400' type="submit" value="Update User" />
                             </form>
                         </div>
                     </div>
