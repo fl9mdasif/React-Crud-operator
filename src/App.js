@@ -7,7 +7,8 @@ import 'boxicons';
 import Navbar from './components/Navbar';
 import CreateUser from './components/CreateUser';
 import NotFound from './components/NotFound';
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
         <Route path='/update/:userId' element={<Update />} ></Route>
         <Route path='*' element={<NotFound />} ></Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

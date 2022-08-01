@@ -1,25 +1,35 @@
 // import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useQuery } from '@tanstack/react-query'
-
+import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
+// import { useQuery } from '@tanstack/react-query'
 
 const Update = () => {
-
+    const [users, setUsers] = useState([])
     const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { userId } = useParams();
 
-    const { isLoading, error, data: users } = useQuery(['updateUser'], () =>
-        fetch(`http://localhost:5001/user/all/${userId}`).then(res =>
-            res.json()
-        )
-    )
-    if (isLoading) return 'Loading...'
-    if (error) return 'An error has occurred: ' + error.message
+    useEffect(() => {
+        fetch(`http://localhost:5001/user/all/${userId}`)
+            .then(res => res.json())
+            .then(data => setUsers(data))
+    }, [userId])
+
+
+    // const { isLoading, error, data: users, refetch } = useQuery(['usersData', userId], () =>
+    //     fetch(`http://localhost:5001/user/all/${userId}`).then(res =>
+    //         res.json()
+    //     )
+    // )
+    // // refetch()
+    // if (isLoading) return 'Loading...'
+    // if (error) return 'An error has occurred: ' + error.message
 
 
     const onSubmit = formInfo => {
+        // formInfo.preventDefault()
         const { fname, lname, email, mobile, role, state } = formInfo;
         const user = {
             First_Name: fname,
@@ -41,17 +51,19 @@ const Update = () => {
             },
         })
             .then((response) => response.json())
-            .then((json) => console.log('ff'));
-        if (isLoading) {
-            return 'Loading...'
-        } else
-            navigate('/')
+            .then((json) => {
+                // alert('updated')
+                toast.success('Updated successfully')
+                navigate('/')
+            });
+
     }
     return (
 
         <div>
-            {/* <h1>update : {userId}</h1>
-            <p>{users.Email}</p> */}
+            <h1>update : {userId}</h1>
+            <p>{users.First_Name}</p>
+            <p>{users.Last_Name}</p>
 
             <div>
                 <div className="py-10 font-bold text-center text-primary sm:text-2xl md:text-4xl lg:text-5xl">Update User</div>
@@ -64,7 +76,7 @@ const Update = () => {
                                 <div className="form-control w-full max-w-xs">
                                     <input
                                         type="text"
-                                        defaultValue={users.First_Name}
+                                        defaultValue={users?.First_Name}
                                         placeholder="First Name"
                                         className="input input-bordered w-full max-w-xs"
                                         {...register("fname", {
@@ -82,7 +94,7 @@ const Update = () => {
                                 {/* Input last name  */}
                                 <div className="form-control w-full max-w-xs">
                                     <input
-                                        defaultValue={users.Last_Name}
+                                        defaultValue={users?.Last_Name}
                                         type="text"
                                         placeholder="Last Name"
                                         className="input input-bordered w-full max-w-xs"

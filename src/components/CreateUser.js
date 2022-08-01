@@ -1,7 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import './Styles.css'
-import { refetch } from '@tanstack/react-query'
+import { toast } from 'react-toastify';
+// import { refetch } from '@tanstack/react-query'
 
 const CreateUser = () => {
     //Form Control & Submit
@@ -31,9 +32,9 @@ const CreateUser = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                alert('Success')
+                toast('user added successfully')
+                // refetch()
             });
-        refetch()
     }
     return (
         <div>

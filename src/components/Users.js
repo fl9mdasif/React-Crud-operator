@@ -1,27 +1,17 @@
-// import React, { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { refetch, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
+import { toast } from 'react-toastify';
 
 const Users = () => {
 
     const navigate = useNavigate()
 
-    const { isLoading, error, data: users } = useQuery(['usersData'], () =>
+    const { isLoading, error, data, refetch } = useQuery(['usersData'], () =>
         fetch('http://localhost:5001/user/all').then(res =>
             res.json()
-        )
-    )
+        ))
     if (isLoading) return 'Loading...'
     if (error) return 'An error has occurred: ' + error.message
-
-
-    const updateUser = (id) => {
-        const proceed = window.confirm('Are you sure to update user ');
-        if (proceed) {
-            navigate(`/update/${id}`)
-        }
-    };
 
 
     //delete user
@@ -34,9 +24,20 @@ const Users = () => {
             })
                 .then(res => res.json())
                 .then(data => {
+                    // alert('Delete')
+                    toast('deleted')
+                    refetch()
                 })
         }
-        refetch()
+    };
+
+    const updateUser = (id) => {
+        const proceed = window.confirm('Are you sure to update user ');
+        if (proceed) {
+            navigate(`/update/${id}`)
+            // refetch()
+
+        }
     };
 
     return (
@@ -58,7 +59,7 @@ const Users = () => {
                     </thead>
                     <tbody >
                         {
-                            users.map((a, index) =>
+                            data.map((a, index) =>
                                 <tr className="border ">
                                     <td>{index + 1}</td>
                                     <td>{a.First_Name}</td>
@@ -70,7 +71,8 @@ const Users = () => {
 
                                     <td><button onClick={() => updateUser(a._id)} className='btn px-3 py-1 bg-green-600 btn-xs text-white '><box-icon color='white' type='solid' size='' name='pencil'></box-icon></button>
                                         <button onClick={() => deleteUser(a._id)} className='btn px-3 py-1 bg-white btn-xs '><box-icon color='red' name='trash-alt'></box-icon></button></td>
-                                </tr>)
+                                </tr>
+                            )
                         }
 
 
