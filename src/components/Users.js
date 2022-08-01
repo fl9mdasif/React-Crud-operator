@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import { refetch, useQuery } from '@tanstack/react-query'
 
 const Users = () => {
-    // const { userId } = useParams();
+
     const navigate = useNavigate()
-    const [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        fetch(`http://localhost:5001/user/all`)
-            .then(res => res.json())
-            .then(data => setUsers(data));
+    const { isLoading, error, data: users } = useQuery(['usersData'], () =>
+        fetch('http://localhost:5001/user/all').then(res =>
+            res.json()
+        )
+    )
+    if (isLoading) return 'Loading...'
+    if (error) return 'An error has occurred: ' + error.message
 
-    }, []);
 
     const updateUser = (id) => {
-        const proceed = window.confirm('Are you sure to delete product');
+        const proceed = window.confirm('Are you sure to update user ');
         if (proceed) {
-            const url = `http://localhost:5001/user/all/${id}`;
-            fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                })
-
             navigate(`/update/${id}`)
         }
     };
@@ -32,7 +26,7 @@ const Users = () => {
 
     //delete user
     const deleteUser = (id) => {
-        const proceed = window.confirm('Are you sure to delete product');
+        const proceed = window.confirm('Are you sure to delete user');
         if (proceed) {
             const url = `http://localhost:5001/user/all/${id}`;
             fetch(url, {
@@ -40,16 +34,15 @@ const Users = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    window.location.reload();
-                    alert('user deleted successfully')
                 })
         }
+        refetch()
     };
 
     return (
         <div>
             <div className=" py-10 font-bold text-center text-primary sm:text-2xl md:text-4xl lg:text-5xl">All USERS</div>
-            <div className=" pt-6 bg-gray-100 flex items-center justify-center">
+            <div className=" pt-6 bg-gray-100 fle items-center justify-center">
                 <table class="table border w-full">
                     <thead>
                         <tr >

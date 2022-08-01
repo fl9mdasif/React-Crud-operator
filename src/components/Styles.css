@@ -1,0 +1,10 @@
+input.input.input-bordered.w-full.max-w-xs {
+    /* display: flex; */
+    just: revert;
+    padding: 1;
+    padding: 3px;
+}
+
+.form-control.w-full.max-w-xs {
+    padding: 10px;
+}

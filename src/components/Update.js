@@ -1,27 +1,25 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query'
 
 
 const Update = () => {
+
     const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
-
-    const [users, setUsers] = useState([])
     const { userId } = useParams();
 
-    useEffect(() => {
-        const url = `http://localhost:5001/user/all/${userId}`;
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                setUsers(data)
-            })
-    }, [userId])
+    const { isLoading, error, data: users } = useQuery(['updateUser'], () =>
+        fetch(`http://localhost:5001/user/all/${userId}`).then(res =>
+            res.json()
+        )
+    )
+    if (isLoading) return 'Loading...'
+    if (error) return 'An error has occurred: ' + error.message
 
 
     const onSubmit = formInfo => {
-        // formInfo.preventDefault();
         const { fname, lname, email, mobile, role, state } = formInfo;
         const user = {
             First_Name: fname,
@@ -33,9 +31,7 @@ const Update = () => {
         }
         // console.log('product', user);
 
-
         const url = `http://localhost:5001/user/all/${userId}`;
-
         //put updateOne
         fetch(url, {
             method: 'PUT',
@@ -45,14 +41,17 @@ const Update = () => {
             },
         })
             .then((response) => response.json())
-            .then((json) => console.log(json));
-        navigate('/')
+            .then((json) => console.log('ff'));
+        if (isLoading) {
+            return 'Loading...'
+        } else
+            navigate('/')
     }
     return (
 
         <div>
-            <h1>update : {userId}</h1>
-            <p>{users.Email}</p>
+            {/* <h1>update : {userId}</h1>
+            <p>{users.Email}</p> */}
 
             <div>
                 <div className="py-10 font-bold text-center text-primary sm:text-2xl md:text-4xl lg:text-5xl">Update User</div>
@@ -194,7 +193,7 @@ const Update = () => {
 
 
                                 {/* Sbmit Button */}
-                                <input className='border px-4 py-2 w-full max-w-xs bg-red-400' type="submit" value="Update User" />
+                                <input className='border pointer px-4 py-2 w-full max-w-xs bg-red-400' type="submit" value="Update User" />
                             </form>
                         </div>
                     </div>
