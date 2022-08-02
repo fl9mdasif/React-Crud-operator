@@ -8,7 +8,7 @@ const Users = () => {
 
     //use refetch for update data in real time
     const { isLoading, error, data, refetch } = useQuery(['usersData'], () =>
-        fetch('http://localhost:5001/user/all').then(res =>
+        fetch('https://intense-inlet-99805.herokuapp.com/user/all').then(res =>
             res.json())
     )
     if (isLoading) return 'Loading...'
@@ -19,7 +19,7 @@ const Users = () => {
     const deleteUser = (id) => {
         const proceed = window.confirm('Are you sure to delete user');
         if (proceed) {
-            const url = `http://localhost:5001/user/all/${id}`;
+            const url = `https://intense-inlet-99805.herokuapp.com/user/all/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

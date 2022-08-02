@@ -12,21 +12,10 @@ const Update = () => {
     const { userId } = useParams();
 
     useEffect(() => {
-        fetch(`http://localhost:5001/user/all/${userId}`)
+        fetch(`https://intense-inlet-99805.herokuapp.com/user/all/${userId}`)
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [userId])
-
-
-    // const { isLoading, error, data: users, refetch } = useQuery(['usersData', userId], () =>
-    //     fetch(`http://localhost:5001/user/all/${userId}`).then(res =>
-    //         res.json()
-    //     )
-    // )
-    // // refetch()
-    // if (isLoading) return 'Loading...'
-    // if (error) return 'An error has occurred: ' + error.message
-
 
     const onSubmit = formInfo => {
         // formInfo.preventDefault()
@@ -41,7 +30,7 @@ const Update = () => {
         }
         // console.log('product', user);
 
-        const url = `http://localhost:5001/user/all/${userId}`;
+        const url = `https://intense-inlet-99805.herokuapp.com/user/all/${userId}`;
         //put updateOne
         fetch(url, {
             method: 'PUT',

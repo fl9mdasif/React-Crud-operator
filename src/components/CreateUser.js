@@ -21,7 +21,7 @@ const CreateUser = () => {
             State: state
         }
         console.log('product', product);
-        const url = `http://localhost:5001/user/all`;
+        const url = `https://intense-inlet-99805.herokuapp.com/user/all`;
 
         fetch(url, {
             method: 'POST',
