@@ -82,13 +82,11 @@ const Update = () => {
                                         {...register("fname", {
                                             required: {
                                                 value: true,
-                                                message: 'First Name is Required'
+
                                             }
                                         })}
                                     />
-                                    <label className="label">
-                                        {errors.fname?.type === 'required' && <span className="label-text-alt text-red-500">{errors.fname.message}</span>}
-                                    </label>
+
                                 </div>
 
                                 {/* Input last name  */}
@@ -105,10 +103,7 @@ const Update = () => {
                                             }
                                         })}
                                     />
-                                    <label className="label">
-                                        {errors.lname?.type === 'required' && <span className="label-text-alt text-red-500">{errors.lname.message}</span>}
-                                        {errors.lname?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.lname.message}</span>}
-                                    </label>
+
                                 </div>
 
                                 {/* Input Email */}
@@ -131,10 +126,7 @@ const Update = () => {
                                             }
                                         })}
                                     />
-                                    <label className="label">
-                                        {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                                        {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                                    </label>
+
                                 </div>
 
                                 {/* Input mobile numbet*/}
@@ -142,7 +134,6 @@ const Update = () => {
 
                                     <input
                                         defaultValue={users.Phone}
-
                                         type="number"
                                         placeholder="Mobile Number"
                                         className="input input-bordered w-full max-w-xs"
@@ -153,9 +144,7 @@ const Update = () => {
                                             }
                                         })}
                                     />
-                                    <label className="label">
-                                        {errors.mobile?.type === 'required' && <span className="label-text-alt text-red-500">{errors.mobile.message}</span>}
-                                    </label>
+
                                 </div>
 
 
@@ -170,15 +159,13 @@ const Update = () => {
                                         }
                                     })}>
 
-                                        {/* <option value="owner">{users.Roles}</option> */}
+                                        <option value="owner">{users.Roles}</option>
                                         <option value="Owner">Owner</option>
                                         <option value="Driver">Driver</option>
                                         <option value="Employee">Employee</option>
 
                                     </select>
-                                    <label className="label">
-                                        {errors.role?.type === 'required' && <span className="label-text-alt text-red-500">{errors.role.message}</span>}
-                                    </label>
+
                                 </div>
 
 
@@ -193,13 +180,11 @@ const Update = () => {
                                         }
                                     })}>
 
-                                        {/* <option value="Current">{users.State}</option> */}
+                                        <option value="Current">{users.State}</option>
                                         <option value="Current">Current</option>
                                         <option value="Another">Another</option>
                                     </select>
-                                    <label className="label">
-                                        {errors.state?.type === 'required' && <span className="label-text-alt text-red-500">{errors.state.message}</span>}
-                                    </label>
+
                                 </div>
 
 

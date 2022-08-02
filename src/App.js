@@ -16,8 +16,8 @@ function App() {
       <Routes>
 
         <Route path='/' element={<Home />} ></Route>
-        <Route path='/chart' element={<SalaryChart />} ></Route>
         <Route path='/addUser' element={<CreateUser />} ></Route>
+        <Route path='/dashboard' element={<SalaryChart />} ></Route>
         <Route path='/update/:userId' element={<Update />} ></Route>
         <Route path='*' element={<NotFound />} ></Route>
       </Routes>

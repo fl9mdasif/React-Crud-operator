@@ -6,10 +6,11 @@ const Users = () => {
 
     const navigate = useNavigate()
 
+    //use refetch for update data in real time
     const { isLoading, error, data, refetch } = useQuery(['usersData'], () =>
         fetch('http://localhost:5001/user/all').then(res =>
-            res.json()
-        ))
+            res.json())
+    )
     if (isLoading) return 'Loading...'
     if (error) return 'An error has occurred: ' + error.message
 
@@ -48,8 +49,8 @@ const Users = () => {
                     <thead>
                         <tr >
                             <th>No</th>
-                            <th>F.Name</th>
-                            <th>L.name</th>
+                            <th>Name</th>
+
                             <th>Email </th>
                             <th>Phone</th>
                             <th>Role</th>
@@ -62,8 +63,7 @@ const Users = () => {
                             data.map((a, index) =>
                                 <tr className="border ">
                                     <td>{index + 1}</td>
-                                    <td>{a.First_Name}</td>
-                                    <td>{a.Last_Name}</td>
+                                    <td>{a.First_Name} {a.Last_Name}</td>
                                     <td>{a.Email}</td>
                                     <td>{a.Phone} </td>
                                     <td>{a.Roles} </td>

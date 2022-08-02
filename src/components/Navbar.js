@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Styles.css'
 
 const Navbar = () => {
     const photoUrl = 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
@@ -8,6 +9,7 @@ const Navbar = () => {
         <>
             <li><Link to='/' href="#2">Home</Link></li>
             <li><Link to='/addUser' >Add User</Link></li>
+            <li><Link to='/dashboard' >Dashboard</Link></li>
             {/* <li><Link to='/completed-task' href="#2">Completed Task</Link></li> */}
             {/* <li><Link to='login' >Login</Link></li> */}
 

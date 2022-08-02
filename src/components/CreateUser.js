@@ -6,11 +6,10 @@ import { toast } from 'react-toastify';
 
 const CreateUser = () => {
     //Form Control & Submit
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const onSubmit = formInfo => {
         // formInfo.target.reset();
-
         const { fname, lname, email, mobile, role, state } = formInfo;
 
         const product = {
@@ -35,13 +34,14 @@ const CreateUser = () => {
                 toast('user added successfully')
                 // refetch()
             });
+        reset()
+
     }
     return (
         <div>
             <div className="py-5 font-bold text-center text-primary sm:text-2xl md:text-4xl lg:text-5xl">ADD User</div>
 
             <div className=' border-full flex justify-center items-center'>
-
 
                 <form className=' bg-gray-100 px-10 py-4' onSubmit={handleSubmit(onSubmit)}>
                     {/* Input first Name */}
@@ -164,8 +164,8 @@ const CreateUser = () => {
                     {/* Sbmit Button */}
                     <input className='border w-full bg-gray-500 p-2 max-w-xs text-red' type="submit" value="ADD USER" />
                 </form>
+
             </div>
-            {/* <ToastContainer></ToastContainer> */}
         </div>
     );
 };
